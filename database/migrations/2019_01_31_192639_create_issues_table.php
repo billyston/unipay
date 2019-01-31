@@ -14,8 +14,12 @@ class CreateIssuesTable extends Migration
     public function up()
     {
         Schema::create('issues', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table -> increments('id');
+            $table -> string('issue_code', 15 ) -> unique();
+            $table -> string('student_code', 15 ) -> unsigned();
+            $table -> string('transaction_key', 15 ) -> unsigned();
+            $table -> text('issue' );
+            $table -> timestamps();
         });
     }
 
