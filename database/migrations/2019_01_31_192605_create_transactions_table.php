@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table -> increments('id');
             $table -> string('transaction_code', 15 ) -> unique();
-            $table -> string('student_code', 15 ) -> unsigned();
+            $table -> string('student_code', 15 );
             $table -> string('payment_type', 40 );
             $table -> decimal('transacted_amount', 9,2 );
             $table -> decimal('transaction_charge', 9,2 );
@@ -31,6 +31,9 @@ class CreateTransactionsTable extends Migration
             $table -> timestamp( 'transaction_date' );
             $table -> string( 'token', 20 );
             $table -> string( 'transaction_status', 5 );
+
+            $table -> foreign( 'student_code' ) -> references( 'student_code' ) -> on( 'students' ) -> onDelete( 'cascade' );
+
             $table -> timestamps();
         });
     }

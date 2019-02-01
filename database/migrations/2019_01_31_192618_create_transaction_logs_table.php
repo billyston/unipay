@@ -16,8 +16,11 @@ class CreateTransactionLogsTable extends Migration
         Schema::create('transaction_logs', function (Blueprint $table) {
             $table -> increments('id');
             $table -> string('log_code', 15 ) -> unique();
-            $table -> string('transaction_code', 15 ) -> unsigned();
+            $table -> string('transaction_code', 15 );
             $table -> text('data' );
+
+            $table -> foreign( 'transaction_code' ) -> references( 'transaction_code' ) -> on( 'transactions' ) -> onDelete( 'cascade' );
+
             $table -> timestamps();
         });
     }
