@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -36,14 +36,24 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'student' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'students',
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'jwt',
+            'provider' => 'students',
+        ],
+
+        'school_admin' => [
+            'driver' => 'session',
+            'provider' => 'school_admins',
+        ],
+
+        'school' => [
+            'driver' => 'jwt',
+            'provider' => 'school_admins',
         ],
     ],
 
@@ -65,9 +75,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class,
+        'students' => [
+            'driver'    => 'eloquent',
+            'model'     => \App\Model\Student::class,
+        ],
+
+        'school_admins' => [
+            'driver'    => 'eloquent',
+            'model'     => \App\Model\SchoolAdmin::class,
         ],
 
         // 'users' => [
@@ -92,11 +107,16 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'students' => [
+            'provider' => 'students',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'school_admins' => [
+            'provider' => 'school_admins',
             'table' => 'password_resets',
             'expire' => 60,
         ],
     ],
-
 ];

@@ -14,17 +14,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return School::latest() -> get();
     }
 
     /**
@@ -45,17 +35,6 @@ class SchoolController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(School $school)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\School  $school
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(School $school)
     {
         //
     }
